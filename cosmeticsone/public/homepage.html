@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Category Scroll Website</title>
+  <link rel="stylesheet" href="./homepage.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: #1f2937;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    header nav a {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1em;
+    }
+
+    .container {
+      display: flex;
+      
+    }
+
+    .sidebar {
+      width: 200px;
+      background: url('./cosmetics/verticle-screen-care-banner.png') no-repeat;
+      background-size: cover;
+      padding: 20px;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 0px 3px 5px rgba(115, 164, 255, 0.712);
+    }
+
+    .sidebar li {
+      margin-bottom: 15px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #090420;
+      font-size: medium;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    section {
+      margin-bottom: 50px;
+    }
+    section:nth-child(1){
+      border-radius: 10px;
+      background: url('./cosmetics/Natural-Skin-Care-Banner-4.jpg') no-repeat;
+      background-size: cover;
+    }
+    section:nth-child(2){
+      border-radius: 10px;
+      background: url('./cosmetics/Natural-Skin-Care-Banner-one.png') no-repeat;
+      background-size: cover;
+    }
+    section:nth-child(3){
+      border-radius: 10px;
+      background: url('./cosmetics/Natural-Skin-Care-Banner-two.png') no-repeat;
+      background-size: cover;
+    }
+    section h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #0e294d;
+      text-shadow: -3px 1px 3px rgba(197, 245, 252, 0.959);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    
+    .product-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 60%;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .product-card h4 {
+      margin: 10px 0;
+      font-size: 1em;
+      color: #374151;
+    }
+
+    .product-card p {
+      color: #10b981;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .product-card button {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .product-card button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">MyShop</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Explore</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+  <div class="section">
+    <h2>FEATURED PRODUCTS</h2>
+    <div class="products">
+      <div class="product-card">
+        <img src="./cosmetics/skin-care-banner.jpg" alt="Product 1">
+        <h4>Product 1</h4>
+        <p>$20</p>
+        <button>Buy Now</button>
+      </div>
+      <div class="product-card">
+        <img src="./cosmetics/skin-care-banner13.jpg" alt="Product 2">
+        <h4>Alovera Oil</h4>
+        <p>$25</p>
+        <button>Buy Now</button>
+      </div>
+      <div class="product-card">
+        <img src="./cosmetics/skin-care-banner11.jpg" alt="Product 3">
+        <h4>Product 3</h4>
+        <p>$30</p>
+        <button>Buy Now</button>
+      </div>
+      <div class="product-card">
+        <img src="./cosmetics/skin-care-banner12.jpg" alt="Product 4">
+        <h4>Product 4</h4>
+        <p>$28</p>
+        <button>Buy Now</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <aside class="sidebar">
+      <ul>
+        <li><a onclick="scrollToSection('cat1')">Sun Screen Cream</a></li>
+        <li><a onclick="scrollToSection('cat2')">Hairfall Reducing Oil</a></li>
+        <li><a onclick="scrollToSection('cat3')">Purified Body Lotion</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <section id="cat1">
+        <h2>Sun Screen Cream</h2>
+        <div class="products">
+          <div class="product-card">
+            <img src="./cosmetics/gerniar-one.webp" alt="Product 1">
+            <h4>Product 1</h4>
+            <p>$20</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/garnier-two.jpg" alt="Product 2">
+            <h4>Product 2</h4>
+            <p>$25</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/garnier-three.jpg" alt="Product 3">
+            <h4>Product 3</h4>
+            <p>$30</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/gerniar-four.webp" alt="Product 4">
+            <h4>Product 4</h4>
+            <p>$22</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/gernier-five.png" alt="Product 5">
+            <h4>Product 5</h4>
+            <p>$18</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/gerniar-six.webp" alt="Product 6">
+            <h4>Product 6</h4>
+            <p>$40</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/garnier-seven.jpg" alt="Product 7">
+            <h4>Product 7</h4>
+            <p>$28</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/ponds-eight.webp" alt="Product 8">
+            <h4>Product 8</h4>
+            <p>$35</p>
+            <button>Buy Now</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="cat2">
+        <h2>Hairfall Reducing Oil</h2>
+        <div class="products">
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-one.jpg" alt="Product 1">
+            <h4>Product 1</h4>
+            <p>$20</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-two.jpg" alt="Product 2">
+            <h4>Product 2</h4>
+            <p>$25</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-three.webp" alt="Product 3">
+            <h4>Product 3</h4>
+            <p>$30</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-four.jpg" alt="Product 4">
+            <h4>Product 4</h4>
+            <p>$22</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-five.jpg" alt="Product 5">
+            <h4>Product 5</h4>
+            <p>$18</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-six.jpg" alt="Product 6">
+            <h4>Product 6</h4>
+            <p>$40</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-seven.webp" alt="Product 7">
+            <h4>Product 7</h4>
+            <p>$28</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/hairfall-eight.jpg" alt="Product 8">
+            <h4>Product 8</h4>
+            <p>$35</p>
+            <button>Buy Now</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="cat3">
+        <h2>Category 3</h2>
+        <div class="products">
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-one.webp" alt="Product 1">
+            <h4>Product 1</h4>
+            <p>$20</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-two.jpeg" alt="Product 2">
+            <h4>Product 2</h4>
+            <p>$25</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-three.jpeg" alt="Product 3">
+            <h4>Product 3</h4>
+            <p>$30</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-four.webp" alt="Product 4">
+            <h4>Product 4</h4>
+            <p>$22</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-five.jpg" alt="Product 5">
+            <h4>Product 5</h4>
+            <p>$18</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-six.jpg" alt="Product 6">
+            <h4>Product 6</h4>
+            <p>$40</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-seven.jpg" alt="Product 7">
+            <h4>Product 7</h4>
+            <p>$28</p>
+            <button>Buy Now</button>
+          </div>
+          <div class="product-card">
+            <img src="./cosmetics/body-lotion-eight.webp" alt="Product 8">
+            <h4>Product 8</h4>
+            <p>$35</p>
+            <button>Buy Now</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

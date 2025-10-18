@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glassmorphism Portfolio</title>
+  <link rel="stylesheet" href="travel.css" />
+  <link rel="stylesheet" href="navbar.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+    <form action="/login" method="post">
+    <section>
+      <video src="water.mp4" autoplay muted loop></video>
+       <div class="glass-card" id="card">
+          <h1>TRAVEL PORTE.</h1>
+          <p style="color: rgb(174, 255, 231);
+                    font-family: 'Times New Roman', Times, serif;
+                    font-size: 18px;
+                    font-style: italic;">You are near to fullfil your dream</p>
+            
+        <div class="container">       
+           <div class="form-box">
+                <header>
+                    <h1 id="title">Login</h1>
+                </header>
+                <form action="">
+                    <input type="text" placeholder="Name" id="nameField">
+                    <input type="email" placeholder="Username or Email address">
+
+                    <input type="password" placeholder="Password">
+                    <a href="">Forgot Password?</a>
+                    <input type="button" value="Login" id="signinBtn">
+
+                    <div class="links">
+                        <a href="#"><img src="./assets/fb.png" alt=""></a>
+                        <a href="#"><img src="./assets/twitter.png" alt=""></a>
+                        <a href="#"><img src="./assets/goggle.png" alt=""></a>
+                    </div>
+                    <p class="signup">Not a member?<a href="#" id="signupBtn">Sign Up</a></p>
+                </form>
+            </div>
+          </div>
+       </div>
+    </div>
+    </section>
+        <header>
+           <div class="text-header">
+                <h1>Touro Fantacy.</h1><br><br>
+           </div>
+           <div class="link-series">
+                <a href="#" class="link-option">Home</a>
+                <a href="#" class="link-option">Packages</a>
+                <a href="#" class="link-option">Destinations</a>
+                <a href="#" class="link-option">Contact</a>
+            </div>
+            
+        </header> 
+          
+    <script>
+        const title = document.getElementById('title');
+        const nameField = document.getElementById('nameField');
+        const signinBtn = document.getElementById('signinBtn');
+        const signupBtn = document.getElementById('signupBtn');
+
+        signupBtn.onclick = function(){
+            title.innerHTML = "Sign Up";
+            nameField.style.display = "block";
+        }
+        signinBtn.onclick = function(){
+            title.innerHTML = "Login";
+            nameField.style.display = "none";
+        }
+    </script>
+    </form>
+</body>

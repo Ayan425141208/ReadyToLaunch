@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <title>Glassmorphism Portfolio</title>
+  <link rel="stylesheet" href="grocery-home.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="home-grocery.css" />
+  <style>
+    :root {
+      --bg: radial-gradient(1200px 800px at 10% -10%, #2a2a72 0%, transparent 40%),
+             radial-gradient(1000px 600px at 110% 10%, #009ffd 0%, transparent 35%),
+             linear-gradient(180deg, #0b0f1a 0%, #0a0d16 100%);
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7eef7;
+      --muted: #a6b3c2;
+      --accent: #78e8ff;
+      --border: rgba(255,255,255,0.22);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+    }
+
+    .grocery-store {
+      width: 100%;
+      height: 120%;
+      margin: 0;
+      padding: 0 20px 60px;
+    }
+
+    .grocery-store-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .kicker {
+      display: inline-block;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: linear-gradient(90deg, rgba(120,232,255,0.16), rgba(120,232,255,0.04));
+      border: 1px solid rgba(120,232,255,0.25);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    h1 {
+      margin: 12px 0 10px;
+      font-size: clamp(24px, 3.2vw, 36px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .subhead { color: var(--muted); margin: 0 auto; max-width: 720px; }
+
+    .panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .glass-panel {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      background-clip: padding-box;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px) saturate(120%);
+      -webkit-backdrop-filter: blur(14px) saturate(120%);
+      transform: translate(0%, 5%);
+      overflow: hidden;
+    }
+    .glass-panel::before {
+      /* top highlight */
+      content: "";
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(120% 60% at -10% -20%, rgba(255,255,255,0.25) 0%, transparent 45%),
+                  radial-gradient(120% 80% at 120% -10%, rgba(255,255,255,0.15) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 18px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+    }
+    .panel-title { font-weight: 600; letter-spacing: 0.2px; }
+    .panel-meta { color: var(--muted); font-size: 14px; }
+
+    .product-grid {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      padding: 16px;
+    }
+    
+    @media (min-width: 640px) {
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 960px) {
+      .product-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .product-card {
+      position: relative;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05);
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(120,232,255,0.45);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.35), 0 0 0 1px rgba(120,232,255,0.12) inset;
+    }
+
+    .product-media {
+      aspect-ratio: 1 / 1; /* square */
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      display: grid; place-items: center;
+      overflow: hidden;
+      color: #02131c;
+    }
+    .product-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .product-body { padding: 10px 12px 14px; }
+    .product-title {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      line-height: 1.35;
+      min-height: 2.7em; /* 2 lines */
+    }
+    .price-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 3px;
+    }
+    .price {
+      font-weight: 500; letter-spacing: 0.1px;
+      background: linear-gradient(90deg, #e2ebff, #b7f4ff);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+    }
+    .buy-btn {
+      appearance: none; border: none; cursor: pointer;
+      padding: 8px 10px; font-weight: 600; font-size: 12px;
+      color: #051018;
+      background: linear-gradient(180deg, #b6eeff, #78e8ff);
+      border-radius: 999px;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15), 0 6px 16px rgba(120,232,255,0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .buy-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(120,232,255,0.45); }
+    .buy-btn:active { transform: translateY(0); }
+
+    /* Layout responsiveness */
+    @media (max-width: 920px) {
+      .panels { grid-template-columns: 1fr; }
+    }
+
+    /* Small helper badge */
+    .badge {
+      position: absolute; top: 10px; left: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      color: #02131c;
+      background: rgba(120,232,255,0.9);
+      padding: 6px 8px; border-radius: 999px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+    <form action="/home" method="get">
+        
+    <section>
+      <div class="info-card-header">
+        <nav class="navbar">
+        <!-- Logo -->
+        <div class="logo">L</div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+          <a href="#">Explore</a>
+          <a href="#">Home</a>
+          <a href="#">Contact</a>
+          <a href="#">About</a>
+        </div>
+      </nav>
+      <div class="card-container">
+      <div class="info-card">
+        <img src="./product/cosmetics-logo.jpeg" alt="Logo" class="card-logo" />
+        <div class="card-content">
+          <h2 class="card-title">STORE 99</h2>
+          <p class="card-text">
+            This card uses a frosted glass background with smooth shadow and border. Fully responsive and interactive.
+          </p>
+          <button class="card-button">Explore</button>
+        </div>
+      </div>
+      <div class="info-card">
+        <h2>About Us</h2>
+        <p>We provide top-quality services with a focus on user satisfaction, innovation, and responsive design.</p>
+      </div>
+      <div class="info-card">
+        <h2>Contact</h2>
+        <p>Reach out anytime via email or phone. Our support team is available 24/7 to assist you.</p>
+      </div>
+    </div>
+      </div>
+      
+    </section>
+    <section class="card-grid1">
+    <div class="panels">
+      <!-- Panel A -->
+      <article class="glass-panel" aria-label="Featured Panel A">
+        <header class="panel-header">
+          <div class="panel-title">Cosmetics Ultra</div>
+          <div class="panel-meta">Buy Now</div>
+        </header>
+        <div class="product-grid">
+          <!-- 8 product cards -->
+          
+          <!-- Card 1 -->
+          <div class="product-card">
+            <span class="badge">NEW</span>
+            <div class="product-media">
+              <img src="./product/Anti-Bactrol-shampoo.jpg" alt="Wireless Headphones" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Anti-Bactrol-shampoo</h3>
+              <div class="price-row">
+                <span class="price">$19.7</span>
+                <button class="buy-btn" data-product="Wireless Headphones Pro" data-price="129">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Badger Rose Face Cleansing Oil.jpg" alt="Smart Watch" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Rose Face Cleansing Oil</h3>
+              <div class="price-row">
+                <span class="price">$17.5</span>
+                <button class="buy-btn" data-product="Smart Watch Series X" data-price="199">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Bee Beauty Makeup Cleansing.jpg" alt="Sneakers" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Bee Beauty Makeup Cleansing</h3>
+              <div class="price-row">
+                <span class="price">$14.5</span>
+                <button class="buy-btn" data-product="AirFlow Sneakers" data-price="89">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Cleansing oil - Meyeghor.webp" alt="Camera" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Cleansing oil Meyeghor</h3>
+              <div class="price-row">
+                <span class="price">$13.5</span>
+                <button class="buy-btn" data-product="Mirrorless Camera ZL" data-price="749">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Cleansing Oil Deep Clean.jpg" alt="Running Shoes" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Cleansing Oil Deep Clean</h3>
+              <div class="price-row">
+                <span class="price">$30.9</span>
+                <button class="buy-btn" data-product="Trail Runner X2" data-price="109">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Cleansing Oil Korean Facial Cleanser.jpg" alt="Laptop" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Korean Facial Cleanser</h3>
+              <div class="price-row">
+                <span class="price">$19</span>
+                <button class="buy-btn" data-product="Ultrabook 14 Lite" data-price="999">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/CodeSkin Cleansing Oil.webp" alt="Coffee Maker" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">CodeSkin Cleansing Oil</h3>
+              <div class="price-row">
+                <span class="price">$42</span>
+                <button class="buy-btn" data-product="Cold Brew Maker" data-price="59">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/DHC Deep Cleansing Oil.jpg" alt="Speaker" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">DHC Deep Cleansing Oil</h3>
+              <div class="price-row">
+                <span class="price">$39.9</span>
+                <button class="buy-btn" data-product="Mini Bluetooth Speaker" data-price="39">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel B -->
+      <article class="glass-panel" aria-label="Featured Panel B">
+        <header class="panel-header">
+          <div class="panel-title">Cosmetics Ultra</div>
+          <div class="panel-meta">Buy Now</div>
+        </header>
+        <div class="product-grid">
+          <!-- 8 product cards -->
+
+          <!-- Card 1 -->
+          <div class="product-card">
+            <span class="badge">HOT</span>
+            <div class="product-media">
+              <img src="./product/DHC Deep Oil.jpg" alt="Backpack" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">DHC Deep Oil</h3>
+              <div class="price-row">
+                <span class="price">$32.5</span>
+                <button class="buy-btn" data-product="Urban Travel Backpack" data-price="79">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/DHC Pore Cleansing Oil.jpg" alt="Sunglasses" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">DHC Pore Cleansing Oil</h3>
+              <div class="price-row">
+                <span class="price">$27.9</span>
+                <button class="buy-btn" data-product="Polarized Sunglasses" data-price="49">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Face_Crema_Purificante.jpg" alt="Book" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Face Crema Purificante</h3>
+              <div class="price-row">
+                <span class="price">$31.9</span>
+                <button class="buy-btn" data-product="Design Systems Handbook" data-price="29">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/FBI-Organic_Lotion.jpg" alt="Gaming Controller" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">FBI-Organic_Lotion</h3>
+              <div class="price-row">
+                <span class="price">$59</span>
+                <button class="buy-btn" data-product="Wireless Gamepad" data-price="59">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Garnier Skin Care Oil.jpg" alt="Bracelet" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Garnier Skin Care Oil</h3>
+              <div class="price-row">
+                <span class="price">$32.4</span>
+                <button class="buy-btn" data-product="Minimalist Bracelet" data-price="24">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Garnier Skin Care.jpg" alt="Headset" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Garnier Skin Care</h3>
+              <div class="price-row">
+                <span class="price">$41.9</span>
+                <button class="buy-btn" data-product="Studio Headset" data-price="139">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Garnier SkinActive Micellar.webp" alt="Vintage Camera" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Garnier SkinActive Micellar</h3>
+              <div class="price-row">
+                <span class="price">$42.4</span>
+                <button class="buy-btn" data-product="Vintage Camera" data-price="249">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/JoJoba Oil Cosprof.png" alt="Notebook" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">JoJoba Oil Cosprof</h3>
+              <div class="price-row">
+                <span class="price">$19</span>
+                <button class="buy-btn" data-product="Hardcover Notebook" data-price="19">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="grocery-store">
+
+    <div class="panels">
+      <!-- Panel A -->
+      <article class="glass-panel" aria-label="Featured Panel A">
+        <header class="panel-header">
+          <div class="panel-title">Cosmetics Ultra</div>
+          <div class="panel-meta">Buy Now</div>
+        </header>
+        <div class="product-grid">
+          <!-- 8 product cards -->
+          
+          <!-- Card 1 -->
+          <div class="product-card">
+            <span class="badge">NEW</span>
+            <div class="product-media">
+              <img src="./product/Makeup Remover Oil Black Tea.jpg" alt="Wireless Headphones" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Oil Black Tea</h3>
+              <div class="price-row">
+                <span class="price">$29.7</span>
+                <button class="buy-btn" data-product="Wireless Headphones Pro" data-price="129">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Natural-organic-cosmetic.jpg" alt="Smart Watch" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Natural organic cosmetic</h3>
+              <div class="price-row">
+                <span class="price">$27.5</span>
+                <button class="buy-btn" data-product="Smart Watch Series X" data-price="199">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Olio-Solare-Iperico.jpg" alt="Sneakers" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Olio Solare Iperico</h3>
+              <div class="price-row">
+                <span class="price">$24.5</span>
+                <button class="buy-btn" data-product="AirFlow Sneakers" data-price="89">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Olivia Skin Purifying Oil.jpg" alt="Camera" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Skin Purifying Oil</h3>
+              <div class="price-row">
+                <span class="price">$33.5</span>
+                <button class="buy-btn" data-product="Mirrorless Camera ZL" data-price="749">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Organikas Jojoba Oil.jpg" alt="Running Shoes" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Organikas Jojoba Oil</h3>
+              <div class="price-row">
+                <span class="price">$31.2</span>
+                <button class="buy-btn" data-product="Trail Runner X2" data-price="109">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/OSITREE - Black Tea Essence Cleansing Oil.webp" alt="Laptop" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Essence Cleansing Oil</h3>
+              <div class="price-row">
+                <span class="price">$89</span>
+                <button class="buy-btn" data-product="Ultrabook 14 Lite" data-price="999">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Pure & Natural Jojoba Oil.jpg" alt="Coffee Maker" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Natural Jojoba Oil</h3>
+              <div class="price-row">
+                <span class="price">$22</span>
+                <button class="buy-btn" data-product="Cold Brew Maker" data-price="59">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Olivia Skin Purifying Oil.jpg" alt="Speaker" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Olio Solare Iperico</h3>
+              <div class="price-row">
+                <span class="price">$33.9</span>
+                <button class="buy-btn" data-product="Mini Bluetooth Speaker" data-price="39">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel B -->
+      <article class="glass-panel" aria-label="Featured Panel B">
+        <header class="panel-header">
+          <div class="panel-title">Cosmetics Ultra</div>
+          <div class="panel-meta">Buy Now</div>
+        </header>
+        <div class="product-grid">
+          <!-- 8 product cards -->
+
+          <!-- Card 1 -->
+          <div class="product-card">
+            <span class="badge">HOT</span>
+            <div class="product-media">
+              <img src="./product/Olivia Skin Purifying Oil.jpg" alt="Backpack" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Olivia Skin Purifying</h3>
+              <div class="price-row">
+                <span class="price">$32.5</span>
+                <button class="buy-btn" data-product="Urban Travel Backpack" data-price="79">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Organikas Jojoba Oil.jpg" alt="Sunglasses" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Organikas Jojoba Oil</h3>
+              <div class="price-row">
+                <span class="price">$27.9</span>
+                <button class="buy-btn" data-product="Polarized Sunglasses" data-price="49">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Skin Cafe Castor Oil.webp" alt="Book" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Skin Cafe Castor Oil</h3>
+              <div class="price-row">
+                <span class="price">$32.9</span>
+                <button class="buy-btn" data-product="Design Systems Handbook" data-price="29">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Skin Cafe Jojoba Oil.webp" alt="Gaming Controller" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Cafe Jojoba Oil</h3>
+              <div class="price-row">
+                <span class="price">$59</span>
+                <button class="buy-btn" data-product="Wireless Gamepad" data-price="59">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Skin Cafe Makeup Cleansing Oil.jpg" alt="Bracelet" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Makeup Cleansing Oil</h3>
+              <div class="price-row">
+                <span class="price">$22.4</span>
+                <button class="buy-btn" data-product="Minimalist Bracelet" data-price="24">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Skin Cafe Makeup Cleansing Oil.webp" alt="Headset" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Cafe Cleansing Oil</h3>
+              <div class="price-row">
+                <span class="price">$19.9</span>
+                <button class="buy-btn" data-product="Studio Headset" data-price="139">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Skin EssentiA Dual Action.webp" alt="Vintage Camera" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">EssentiA Dual Action</h3>
+              <div class="price-row">
+                <span class="price">$38.4</span>
+                <button class="buy-btn" data-product="Vintage Camera" data-price="249">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./product/Skin Cafe Makeup Expart.jpg" alt="Notebook" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Cafe Makeup Expart</h3>
+              <div class="price-row">
+                <span class="price">$19</span>
+                <button class="buy-btn" data-product="Hardcover Notebook" data-price="19">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="section">
+    <!-- Upper Section: Product Cards -->
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="./image/product-one.png" alt="Product 1">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="./image/product-two.png" alt="Product 2">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="./image/product3.png" alt="Product 3">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="./image/product-four.png" alt="Product 4">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="./image/product-five.png" alt="Product 5">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="./image/product-six.png" alt="Product 5">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="./image/product-seven.png" alt="Product 5">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="./image/product-eight.png" alt="Product 5">
+        <div class="product-details">
+          <h3>Cosmetics Package</h3>
+          <p>5 Combo Product Of Cosmetics</p>
+          <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lower Section: Glassmorphism Card with 3 Inner Cards -->
+    <div class="glass-card">
+      <div class="glass-inner">
+        <div class="inner-card">
+          <h3>Distribution</h3>
+          <p>We ensure fast and secure product delivery across all regions with trusted partners.</p>
+        </div>
+        <div class="inner-card">
+          <h3>Search</h3>
+          <p>Find your favorite products easily with our advanced search and filtering options.</p>
+        </div>
+        <div class="inner-card">
+          <h3>Contact</h3>
+          <p>Reach out to us anytime for support, inquiries, or customer assistance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+    <footer class="footer">
+            <h2>CONTACT US</h2><br><br>
+        <div class="social-icons">
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+    <script type="text/javascript">
+      function menuToggle(){
+        const toggleMenu = document.querySelector('.toggle');
+        const section = document.querySelector('section');
+        toggleMenu.classList.toggle('active');
+        section.classList.toggle('active');
+      }
+      function bookNow(destination) {
+        alert("Thank you for booking the " + destination + " package!");
+      }
+
+
+
+      document.querySelectorAll('.icon').forEach(icon => {
+        icon.addEventListener('click', () => {
+            icon.style.transform = 'scale(1.4)';
+            icon.style.transition = 'transform 0.1s';
+
+            setTimeout(() => {
+            icon.style.transform = 'scale(1.2)';
+            }, 100);
+        });
+        });
+    </script>
+    <script src="./home-grocery.js"></script>
+    </form>
+
+</body>
+</html>

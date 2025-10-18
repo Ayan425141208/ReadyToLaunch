@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Glassmorphism Menu</title>
+  <link rel="stylesheet" href="./explore-section.css"/>
+  <link rel="stylesheet" href="explore-grocery.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  min-height: 100vh;
+  background: url('./image/ai-generated-assorted-banner.jpg') no-repeat;
+  background-size: cover;
+}
+
+/* Header/Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.logo {
+  background: url('./image/red-orion.png') no-repeat;
+  
+  font-size: 1.8rem;
+  height: 20px;
+  font-weight: bold;
+  color: #602dc0;
+  text-shadow: rgb(25, 32, 70) 1px 0 10px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #090c31;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Cards Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+}
+
+/* Glass Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  height: 140%;
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.card1{
+ background: url('./image/cosmeticsone.png') no-repeat;
+ background-size: cover;
+}
+.card2{
+ background: url('./image/cosmeticstwo.png') no-repeat;
+ background-size: cover;
+}
+.card3{
+ background: url('./image/cosmeticsthree.png') no-repeat;
+ background-size: cover;
+}
+.card4{
+ background: url('./image/cosmeticsfour.png') no-repeat;
+ background-size: cover; 
+}
+.card5{
+ background: url('./image/cosmeticsfive.png') no-repeat;
+ background-size: cover; 
+}
+.card6{
+ background: url('./image/cosmeticssix.png') no-repeat;
+ background-size: cover; 
+}
+.card7{
+ background: url('./image/cosmeticsseven.png') no-repeat;
+ background-size: cover; 
+}
+.card8{
+ background: url('./image/cosmeticsfive.png') no-repeat;
+ background-size: cover; 
+}
+
+.glass-card:hover {
+  transform: scale(1.05);
+}
+
+.glass-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #090c30;
+  text-shadow: rgb(255, 226, 226) 1px 3px 5px;
+}
+
+.glass-card p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #00ccff;
+}
+
+.glass-card button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  background: #00ffe0;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transform: translateY(100%);
+  transition: background 0.3s;
+}
+
+.glass-card button:hover {
+  background: #00bfa6;
+}
+  </style>
+</head>
+<body>
+ 
+  <header class="navbar">
+    <div class="logo">A M L A</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Order</a></li>
+        <li><a href="#">Packages</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="section">
+  <div class="left">
+  <div class="image-stack" aria-hidden="true">
+  <!-- Replace these src with your own image paths -->
+  <img class="img-base" src="./image/cosmeticsone.png" alt="base image">
+  <img class="img-top" src="./image/cosmeticstwo.png" alt="top image">
+  </div>
+  </div>
+
+
+  <div class="right">
+  <span class="kicker" type="button">Explore</span>
+  <h2>Overlapping Image Composition</h2>
+  <p>Two images overlap to create a layered single-image effect. Use the top image for subject focus and the base image as subtle context. Customize transforms, blend modes, and masks to achieve different visual moods.</p>
+  <a class="btn" href="#">Use this pattern</a>
+  </div>
+  </section>
+  <section class="card-grid">
+    <div class="glass-card card1">
+      <h2></h2>
+      <p></p>
+      <button onclick="book('Beach Escape')">Buy Now</button>
+    </div>
+    <div class="glass-card card2">
+      <h2></h2>
+      <p></p>
+      <button onclick="book('Mountain Hike')">Buy Now</button>
+    </div>
+    <div class="glass-card card3">
+      <h2></h2>
+      <p></p>
+      <button onclick="book('City Explorer')">Buy Now</button>
+    </div>
+    <div class="glass-card card4">
+      <h2></h2>
+      <p></p>
+      <button onclick="book('Desert Safari')">Buy Now</button>
+    </div>
+  </section>
+    <section class="card-grid">
+        <div class="glass-card card5">
+        <h2></h2>
+        <p></p>
+        <button onclick="book('Beach Escape')">Buy Now</button>
+        </div>
+        <div class="glass-card card6">
+        <h2></h2>
+        <p></p>
+        <button onclick="book('Mountain Hike')">Buy Now</button>
+        </div>
+        <div class="glass-card card7">
+        <h2></h2>
+        <p></p>
+        <button onclick="book('City Explorer')">Buy Now</button>
+        </div>
+        <div class="glass-card card8">
+        <h2></h2>
+        <p></p>
+        <button onclick="book('Desert Safari')">Buy Now</button>
+        </div>
+    </section>
+    <section class="card-grid1">
+    <div class="panels">
+      <!-- Panel A -->
+      <article class="glass-panel" aria-label="Featured Panel A">
+        <header class="panel-header">
+          <div class="panel-title">Grocery Mart</div>
+          <div class="panel-meta">Buy Now</div>
+        </header>
+        <div class="product-grid">
+          <!-- 8 product cards -->
+          
+          <!-- Card 1 -->
+          <div class="product-card">
+            <span class="badge">NEW</span>
+            <div class="product-media">
+              <img src="./image/product1.png" alt="Wireless Headphones" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title"></h3>
+              <div class="price-row">
+                <span class="price">$19.7</span>
+                <button class="buy-btn" data-product="Wireless Headphones Pro" data-price="129">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product2.png" alt="Smart Watch" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title"></h3>
+              <div class="price-row">
+                <span class="price">$17.5/lbs</span>
+                <button class="buy-btn" data-product="Smart Watch Series X" data-price="199">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product3.png" alt="Sneakers" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title"></h3>
+              <div class="price-row">
+                <span class="price">$24.7</span>
+                <button class="buy-btn" data-product="AirFlow Sneakers" data-price="89">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product4.png" alt="Camera" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title"></h3>
+              <div class="price-row">
+                <span class="price">$23.2</span>
+                <button class="buy-btn" data-product="Mirrorless Camera ZL" data-price="749">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product5.png" alt="Running Shoes" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title"></h3>
+              <div class="price-row">
+                <span class="price">$21.2</span>
+                <button class="buy-btn" data-product="Trail Runner X2" data-price="109">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product6.png" alt="Laptop" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title"></h3>
+              <div class="price-row">
+                <span class="price">$20.9</span>
+                <button class="buy-btn" data-product="Ultrabook 14 Lite" data-price="999">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product7.png" alt="Coffee Maker" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title"></h3>
+              <div class="price-row">
+                <span class="price">$21.2</span>
+                <button class="buy-btn" data-product="Cold Brew Maker" data-price="59">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product8.png" alt="Speaker" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Sweet Corn</h3>
+              <div class="price-row">
+                <span class="price">$3.9/lbs</span>
+                <button class="buy-btn" data-product="Mini Bluetooth Speaker" data-price="39">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Panel B -->
+      <article class="glass-panel" aria-label="Featured Panel B">
+        <header class="panel-header">
+          <div class="panel-title">Grocery Mart</div>
+          <div class="panel-meta">Buy Now</div>
+        </header>
+        <div class="product-grid">
+          <!-- 8 product cards -->
+
+          <!-- Card 1 -->
+          <div class="product-card">
+            <span class="badge">HOT</span>
+            <div class="product-media">
+              <img src="./image/product9.webp" alt="Backpack" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Fresh Arbi</h3>
+              <div class="price-row">
+                <span class="price">$2.5/lbs</span>
+                <button class="buy-btn" data-product="Urban Travel Backpack" data-price="79">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product10.png" alt="Sunglasses" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Large Yellow Ginger</h3>
+              <div class="price-row">
+                <span class="price">$7.9/lbs</span>
+                <button class="buy-btn" data-product="Polarized Sunglasses" data-price="49">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product11.png" alt="Book" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Green Broccoli</h3>
+              <div class="price-row">
+                <span class="price">$1.9/lbs</span>
+                <button class="buy-btn" data-product="Design Systems Handbook" data-price="29">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product12.png" alt="Gaming Controller" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Napa Fresh Letuice</h3>
+              <div class="price-row">
+                <span class="price">$59</span>
+                <button class="buy-btn" data-product="Wireless Gamepad" data-price="59">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product13.webp" alt="Bracelet" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Red Indian Onion</h3>
+              <div class="price-row">
+                <span class="price">$2.4/lbs</span>
+                <button class="buy-btn" data-product="Minimalist Bracelet" data-price="24">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product14.png" alt="Headset" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Black Paper Seeds</h3>
+              <div class="price-row">
+                <span class="price">$1.9/lbs</span>
+                <button class="buy-btn" data-product="Studio Headset" data-price="139">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product1.png" alt="Vintage Camera" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Large Onion</h3>
+              <div class="price-row">
+                <span class="price">$2.4/lbs</span>
+                <button class="buy-btn" data-product="Vintage Camera" data-price="249">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="product-card">
+            <div class="product-media">
+              <img src="./image/product2.png" alt="Notebook" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">Rosemery Spices</h3>
+              <div class="price-row">
+                <span class="price">$19/lbs</span>
+                <button class="buy-btn" data-product="Hardcover Notebook" data-price="19">Buy Now</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </section>
+  <script>
+	function book(packageName) {
+  alert("You've booked the " + packageName + " package!");
+}
+  </script>
+</body>
+</html>

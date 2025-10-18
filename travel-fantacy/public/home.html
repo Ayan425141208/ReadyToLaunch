@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Travel Landing Page - Example</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --muted:#6b7280;
+      --card-bg: rgba(255,255,255,0.86);
+      --glass: rgba(255,255,255,0.06);
+      --maxW:1200px;
+    }
+    *{box-sizing:border-box}
+    body{
+          font-family:Inter,system-ui,Segoe UI,Roboto,Arial; 
+          margin:0; color:#0f172a; 
+          background: linear-gradient(180deg,#f7fbff, #eef6ff);
+     }
+    .wrap{max-width:var(--maxW); margin:0 auto; padding:24px;}
+
+    /* Header / Nav */
+    header{display:flex; align-items:center; justify-content:space-between; padding:12px 0;}
+    .logo{
+          background: url('./image/mountain-logo.jpg') no-repeat;
+          background-size: cover;
+          width: 10%;
+          height: 100px;
+          border-radius: 50%;
+          }
+     .logo svg{
+          width:40px;
+          height:40px
+          }
+    nav{display:flex;align-items:center;gap:18px}
+    nav a{color:var(--muted); text-decoration:none; font-weight:600}
+    .cta{background:var(--accent); color:white; padding:8px 14px; 
+     border-radius:8px; text-decoration:none}
+    .menu-toggle{display:none}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns: 1fr 420px; gap:28px; 
+     align-items:center; margin-top:18px}
+    .hero-card{
+     background:linear-gradient(180deg, rgba(255,255,255,0.85), 
+     rgba(255,255,255,0.75)); padding:28px; border-radius:16px; 
+     box-shadow:0 6px 30px rgba(12,38,63,0.08)}
+    .hero h1{margin:0 0 10px; font-size:34px}
+    .hero p{margin:0 0 16px; color:var(--muted)}
+    .search-row{display:flex; gap:8px}
+
+    .search-row input{flex:1;padding:10px;border-radius:10px;border:1px solid #e6eefb}
+
+    .search-row button{background:var(--accent); color:white; 
+
+     border:none;padding:10px 14px;border-radius:10px}
+
+    .hero-visual{border-radius:16px; overflow:hidden; 
+
+     box-shadow:0 10px 40px rgba(200, 229, 255, 0.08)}
+
+    .hero-visual img{width:100%;display:block}
+
+    /* Grid sections */
+    .section{margin:36px 0}
+    .section h2{margin:0 0 14px}
+
+    .grid-3x2{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    .card{background:var(--card-bg); border-radius:12px; overflow:hidden; 
+     box-shadow:0 6px 20px rgba(12,38,63,0.06)}
+
+    .card img{width:100%; height:160px; object-fit:cover; display:block}
+    .card .body{padding:12px}
+    .rating{display:flex; gap:6px; align-items:center; color:#f59e0b}
+    .muted{color:var(--muted); font-size:14px}
+
+    /* Booking cards with button */
+    .card .actions{display:flex; justify-content:space-between; 
+     align-items:center; padding:12px}
+    .btn{background: rgb(129, 129, 255); color:white; padding:8px 12px; 
+     border-radius:8px; border:none; cursor:pointer}
+
+    /* Reviews slider */
+    .reviews{position:relative; overflow:hidden}
+    .review-track{display:flex; gap:12px; transition:transform .45s cubic-bezier(.2,.9,.3,1)}
+    .review{min-width:320px; background:var(--card-bg); padding:16px; border-radius:12px}
+    .review .author{display:flex; gap:12px; align-items:center}
+    .avatar{width:48px;height:48px;border-radius:50%; overflow:hidden}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    .review-controls{position:absolute; top:50%; transform:translateY(-50%); 
+     width:100%; display:flex; justify-content:space-between; pointer-events:none}
+
+    .review-controls button{pointer-events:auto; background:rgba(255,255,255,0.85); 
+     border:1px solid #e6eefb; padding:8px;border-radius:8px}
+
+    /* Footer / company columns */
+    footer{background:#fff; border-radius:12px; padding:24px; margin-top:26px; 
+     box-shadow:0 6px 30px rgba(12,38,63,0.04)}
+
+    .footer-grid{display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:18px}
+
+    .socials{display:flex; gap:10px}
+    .socials svg{width:28px;height:28px}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .grid-3x2{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      header nav{display:none}
+      .menu-toggle{display:block}
+    }
+    @media (max-width:640px){
+      .grid-3x2{grid-template-columns:1fr}
+      .review{min-width:260px}
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="6" fill=""/></svg>
+        Wanderly
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+      <button class="menu-toggle" aria-label="toggle menu">☰</button>
+    </header>
+
+    <!-- Hero / First Section -->
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Explore the world with confidence</h1>
+        <p>Handpicked destinations, trusted partners, and easy bookings. Discover your next adventure today.</p>
+        <div class="search-row">
+          <input type="search" placeholder="Search destination, e.g. Bali" id="searchInput">
+          <button id="searchBtn">Search</button>
+        </div>
+        <div style="margin-top:12px; display:flex; gap:10px; align-items:center">
+          <div class="muted">Popular: Bali • Paris • Tokyo</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&sat=-100" alt="travel-banner">
+      </div>
+    </section>
+
+    <!-- Section 2: 6 destination cards with rating in two parallel series -->
+    <section class="section" id="destinations">
+      <h2>Top Destinations (Rated)</h2>
+      <div class="grid-3x2">
+        <!-- 6 cards -->
+        <article class="card">
+          <img src="./image/Bali.jpg" alt="destination">
+          <div class="body">
+            <strong>Bali, Indonesia</strong>
+            <div class="muted">Tropical beaches • 5 days</div>
+            <div class="rating" aria-hidden>
+              <span>★★★★★</span>
+              <span class="muted">4.9 (2.3k)</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop" alt="destination">
+          <div class="body">
+            <strong>Paris, France</strong>
+            <div class="muted">Romantic city • 4 days</div>
+            <div class="rating"><span>★★★★★</span><span class="muted">4.8 (1.1k)</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="./image/Reykjavík.jpg" alt="destination">
+          <div class="body">
+            <strong>Reykjavík, Iceland</strong>
+            <div class="muted">Northern lights • 6 days</div>
+            <div class="rating"><span>★★★★☆</span><span class="muted">4.6 (880)</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="./image/MountFuji.jpg" alt="destination">
+          <div class="body">
+            <strong>Fujinomiya, Japan</strong>
+            <div class="muted">Temples & culture • 5 days</div>
+            <div class="rating"><span>★★★★★</span><span class="muted">4.9 (1.5k)</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="./image/Tapuae-o-Uenuku.jpg" alt="destination">
+          <div class="body">
+            <strong>Tapuae-o-Uenuku, Wellington</strong>
+            <div class="muted">Nature & hikes • 8 days</div>
+            <div class="rating"><span>★★★★☆</span><span class="muted">4.7 (920)</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="./image/cape-town-aerial.jpg" alt="destination">
+          <div class="body">
+            <strong>Cape Town, S. Africa</strong>
+            <div class="muted">Coast & safari • 6 days</div>
+            <div class="rating"><span>★★★★☆</span><span class="muted">4.5 (760)</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 3: 6 destination cards with booking button -->
+    <section class="section">
+      <h2>Book Your Trip</h2>
+      <div class="grid-3x2">
+        <!-- cards similar but with book button -->
+        <article class="card">
+          <img src="./image/Santorini.jpg" alt="dest">
+          <div class="body">
+            <strong>Santorini, Greece</strong>
+            <div class="muted">Sea views • 4 days</div>
+          </div>
+          <div class="actions">
+            <div class="muted">From $499</div>
+            <button class="btn bookBtn" data-dest="Santorini, Greece">Book</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="./image/Swiss-alps-Zermatt.jpg" alt="dest">
+          <div class="body"><strong>Swiss Alps</strong><div class="muted">Ski & chalets • 7 days</div></div>
+          <div class="actions"><div class="muted">From $899</div><button class="btn bookBtn" data-dest="Swiss Alps">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="./image/morocco desert marriage.jpg" alt="dest">
+          <div class="body"><strong>Morocco</strong><div class="muted">Desert & culture • 6 days</div></div>
+          <div class="actions"><div class="muted">From $599</div><button class="btn bookBtn" data-dest="Morocco">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="./image/Lisbon.webp" alt="dest">
+          <div class="body"><strong>Lisbon, Portugal</strong><div class="muted">City & coast • 5 days</div></div>
+          <div class="actions"><div class="muted">From $359</div><button class="btn bookBtn" data-dest="Lisbon">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop" alt="dest">
+          <div class="body"><strong>Bangkok, Thailand</strong><div class="muted">Food & temples • 5 days</div></div>
+          <div class="actions"><div class="muted">From $299</div><button class="btn bookBtn" data-dest="Bangkok">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="./image/maldives.jpg" alt="dest">
+          <div class="body"><strong>Maldives</strong><div class="muted">Island luxury • 6 days</div></div>
+          <div class="actions"><div class="muted">From $1299</div><button class="btn bookBtn" data-dest="Maldives">Book</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Book Your Trip</h2>
+      <div class="grid-3x2">
+        <!-- cards similar but with book button -->
+        <article class="card">
+          <img src="./image/Santorini.jpg" alt="dest">
+          <div class="body">
+            <strong>Santorini, Greece</strong>
+            <div class="muted">Sea views • 4 days</div>
+          </div>
+          <div class="actions">
+            <div class="muted">From $499</div>
+            <button class="btn bookBtn" data-dest="Santorini, Greece">Book</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="./image/mount-alps.jpg" alt="dest">
+          <div class="body"><strong>Swiss Alps</strong><div class="muted">Ski & chalets • 7 days</div></div>
+          <div class="actions"><div class="muted">From $899</div><button class="btn bookBtn" data-dest="Swiss Alps">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop" alt="dest">
+          <div class="body"><strong>Morocco</strong><div class="muted">Desert & culture • 6 days</div></div>
+          <div class="actions"><div class="muted">From $599</div><button class="btn bookBtn" data-dest="Morocco">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="./image/Lisbon.webp" alt="dest">
+          <div class="body"><strong>Lisbon, Portugal</strong><div class="muted">City & coast • 5 days</div></div>
+          <div class="actions"><div class="muted">From $359</div><button class="btn bookBtn" data-dest="Lisbon">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop" alt="dest">
+          <div class="body"><strong>Bangkok, Thailand</strong><div class="muted">Food & temples • 5 days</div></div>
+          <div class="actions"><div class="muted">From $299</div><button class="btn bookBtn" data-dest="Bangkok">Book</button></div>
+        </article>
+
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="dest">
+          <div class="body"><strong>Maldives</strong><div class="muted">Island luxury • 6 days</div></div>
+          <div class="actions"><div class="muted">From $1299</div><button class="btn bookBtn" data-dest="Maldives">Book</button></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Reviews slider -->
+    <section class="section reviews">
+      <h2>What customers say</h2>
+      <div style="overflow:hidden; margin-top:12px;">
+        <div class="review-track" id="reviewTrack">
+          <div class="review">
+            <div class="author"><div class="avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg"/></div><div><strong>Anna K.</strong><div class="muted">Traveled to Bali</div></div></div>
+            <p class="muted" style="margin-top:10px">"Amazing experience — the hotel, the guide, everything was perfect. Highly recommend!"</p>
+          </div>
+
+          <div class="review">
+            <div class="author"><div class="avatar"><img src="https://randomuser.me/api/portraits/men/36.jpg"/></div><div><strong>John D.</strong><div class="muted">Traveled to Iceland</div></div></div>
+            <p class="muted" style="margin-top:10px">"Northern lights tour was the highlight. Smooth booking and responsive support."</p>
+          </div>
+
+          <div class="review">
+            <div class="author"><div class="avatar">
+               <img src="https://randomuser.me/api/portraits/women/68.jpg"/></div>
+            <div><strong>Priya S.</strong><div class="muted">Traveled to Paris</div></div></div>
+            <p class="muted" style="margin-top:10px">"Romantic getaway done right — lovely hotels and excellent recommendations."</p>
+          </div>
+
+          <div class="review">
+            <div class="author"><div class="avatar">
+               <img src="https://randomuser.me/api/portraits/men/12.jpg"/></div>
+               <div><strong>Carlos M.</strong><div class="muted">Traveled to New Zealand</div>
+            </div>
+          </div>
+            <p class="muted" style="margin-top:10px">"Adventure-packed itinerary, great local guides. Will book again."</p>
+          </div>
+
+          <div class="review">
+            <div class="author"><div class="avatar">
+               <img src="https://randomuser.me/api/portraits/women/12.jpg"/></div>
+               <div><strong>Fatima A.</strong><div class="muted">Traveled to Morocco</div>
+          </div></div>
+            <p class="muted" style="margin-top:10px">"Cultural and authentic — the trip exceeded expectations."</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="review-controls"><button id="prevReview">‹</button><button id="nextReview">›</button></div>
+    </section>
+
+    <!-- Footer / company details and columns -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <strong>Wanderly Travel</strong>
+          <p class="muted">123 Travel Road<br/>Dhaka, Bangladesh</p>
+          <p class="muted">Email: hello@wanderly.com<br/>Phone: +880 1X-XXXX-XXXX</p>
+        </div>
+
+        <div>
+          <strong>Destinations</strong>
+          <ul class="muted" style="padding-left:14px;margin-top:8px">
+            <li>Bali</li>
+            <li>Paris</li>
+            <li>Tokyo</li>
+            <li>Bangkok</li>
+          </ul>
+        </div>
+
+        <div>
+          <strong>Popular</strong>
+          <ul class="muted" style="padding-left:14px;margin-top:8px">
+               <a href="https://www.goway.com/destinations/indian-ocean/maldives/places/male">
+               <li>Maldives</li>
+               </a>
+               <a href="https://www.forbestravelguide.com/destinations/santorini-greece">
+               <li>Santorini</li>
+               </a>
+               <a href="https://www.lonelyplanet.com/articles/top-things-to-do-in-the-swiss-alps">
+               <li>Swiss Alps</li>
+               </a>  
+               <a href="https://www.thrillophilia.com/blog/cities-in-new-zealand/">
+               <li>New Zealand</li>
+               </a>  
+          </ul>
+        </div>
+
+        <div>
+          <strong>Follow</strong>
+          <div class="socials" style="margin-top:8px">
+            <!-- Simple inline SVG icons -->
+            <a href="" aria-label="facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+              fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+               <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 
+               8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 
+               1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 
+               0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 
+               6.75-7.951"/>
+              </svg>
+            </a>
+            <a href="" aria-label="twitter">
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+               <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+             </svg>
+            </a>
+            <a href="" aria-label="instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+               <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+              </svg>
+            </a>
+            <a href="https://www.youtube.com/@artisticdocumentation3521" aria-label="youtube">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+               <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Simple booking modal -->
+    <div id="modal" style="display:none;position:fixed;inset:0;background:rgba(2,6,23,0.6);
+    align-items:center;justify-content:center">
+      <div style="background:white;padding:22px;border-radius:12px;max-width:520px;width:94%">
+        <h3 id="modalTitle">Book trip</h3>
+        <p class="muted">Fill details to request booking</p>
+        <div style="display:flex;gap:8px;margin-top:12px"><input placeholder="Name" 
+          style="flex:1;padding:8px;border-radius:8px;border:1px solid #eef6ff">
+          <input placeholder="Email" style="flex:1;padding:8px;border-radius:8px;border:1px solid 
+          #eef6ff"></div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
+          <button id="closeModal" 
+          style="background:#f3f4f6;padding:8px 12px;border-radius:8px;border:none">Cancel</button>
+          <button id="confirmBook" class="btn">Confirm</button></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Mobile nav toggle
+    const menuBtn = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    menuBtn && menuBtn.addEventListener('click', ()=>{ nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex'; });
+
+    // Reviews slider
+    const track = document.getElementById('reviewTrack');
+    const prev = document.getElementById('prevReview');
+    const next = document.getElementById('nextReview');
+    let idx = 0;
+    const count = track.children.length;
+    function showIndex(i){
+      const w = track.children[0].getBoundingClientRect().width + 12; // gap
+      track.style.transform = `translateX(${ -i * w }px)`;
+    }
+    prev.addEventListener('click', ()=>{ idx = (idx - 1 + count) % count; showIndex(idx); });
+    next.addEventListener('click', ()=>{ idx = (idx + 1) % count; showIndex(idx); });
+    // auto-play
+    let autoplay = setInterval(()=>{ idx = (idx + 1) % count; showIndex(idx); }, 5000);
+    track.addEventListener('mouseenter', ()=>clearInterval(autoplay));
+    track.addEventListener('mouseleave', ()=>autoplay = setInterval(()=>{ idx = (idx + 1) % count; showIndex(idx); }, 5000));
+
+    // Booking modal
+    const modal = document.getElementById('modal');
+    document.querySelectorAll('.bookBtn').forEach(b=>{
+      b.addEventListener('click', (e)=>{
+        document.getElementById('modalTitle').textContent = 'Book: ' + e.currentTarget.dataset.dest;
+        modal.style.display = 'flex';
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', ()=> modal.style.display='none');
+    document.getElementById('confirmBook').addEventListener('click', ()=>{
+      alert('Booking request sent — we will contact you soon.');
+      modal.style.display='none';
+    });
+
+    // Search button (demo behaviour)
+    document.getElementById('searchBtn').addEventListener('click', ()=>{
+      const v = document.getElementById('searchInput').value.trim();
+      if(!v) return alert('Please type a destination to search.');
+      alert('Searching for: ' + v);
+    });
+
+    // Keep slider responsive on load/resize
+    window.addEventListener('load', ()=> showIndex(0));
+    window.addEventListener('resize', ()=> showIndex(idx));
+  </script>
+</body>
+</html>

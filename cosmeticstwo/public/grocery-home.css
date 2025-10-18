@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .banner {
+      background: url('./image/cosmetics-banner.png') center/cover no-repeat;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: white;
+    }
+
+    .banner-content {
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    .banner-content h1 {
+      color: rgb(62, 255, 223);
+      font-size: 48px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      animation: text 2s ease-out forwards;
+    }
+
+    @keyframes text {
+        0% {
+        opacity: 0;
+        transform: translateX(-100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .banner-content p {
+      color: #228c94;
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    
+
+    /* Cards Grid */
+    .card-grid1 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      background: url('./image/') no-repeat;
+      background-size: cover;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+
+    .card-grid2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      background: url('./image/farmland-three.png') no-repeat;
+      background-size: cover;
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+    /* Glass Cards */
+    .glass-card {
+      
+      background: rgba(255, 255, 255, 0.1);
+      height: 40%;
+      padding: -0.5rem;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .glass-card:hover {
+      transform: scale(1.05);
+    }
+
+    .glass-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #02172b;
+    }
+
+    .glass-card p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: #0e141be0;
+      text-shadow: rgb(255, 255, 255) 1px 5px 10px;
+    }
+
+    .glass-card button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      background: #00ffe0;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .glass-card a{
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      background: #00ffe0;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .glass-card button:hover {
+      background: #00bfa6;
+    }
